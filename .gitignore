@@ -1,0 +1,17 @@
+# macOS specific files
+.DS_Store
+
+# Local environment variables
+# (e.g. for storing API keys)
+.env
+.env.local
+*.env
+
+# Environments
+.env
+.venv
+venv/
+**/__pycache__/
+
+# Frameworks
+.DS_Store

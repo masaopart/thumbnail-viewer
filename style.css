@@ -1,0 +1,226 @@
+/* 基本設定 */
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  background-color: #f4f6f9;
+  color: #333;
+  margin: 0;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 30px;
+}
+
+/* 全体のコンテナ */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* 操作パネル */
+.controls-container {
+  background-color: #ffffff;
+  padding: 25px 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+  margin-bottom: 40px;
+}
+
+.source-selector {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin-bottom: 25px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.source-selector label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* フォーム部品 */
+input[type="text"], select {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input[type="text"]:focus, select:focus {
+  outline: none;
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+}
+
+#youtube-search-btn {
+  padding: 12px 25px;
+  border: none;
+  background-color: #4a90e2;
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#youtube-search-btn:hover {
+  background-color: #357abd;
+}
+
+.search-container {
+  display: flex;
+  gap: 10px;
+}
+
+/* サムネイルグリッド */
+.thumbnail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.thumbnail-item {
+  background-color: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.thumbnail-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.thumbnail-item img {
+  width: 100%;
+  display: block;
+  cursor: pointer;
+}
+
+.thumbnail-image-container {
+  position: relative;
+  width: 100%;
+}
+
+.thumbnail-duration {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background-color: rgba(0, 0, 0, 0.85);
+  color: white;
+  padding: 3px 6px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.thumbnail-item .title-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  padding: 15px;
+}
+
+.thumbnail-item h3 {
+  margin: 0 0 10px 0;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.thumbnail-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: #666;
+  padding: 0 15px 15px 15px;
+}
+
+.thumbnail-meta .views, .thumbnail-meta .date {
+  margin: 0;
+}
+
+/* メッセージ */
+.loading-message, .error-message {
+  text-align: center;
+  padding: 50px;
+  font-size: 18px;
+  color: #777;
+}
+
+/* 続きを読むボタン */
+.load-more-container {
+  text-align: center;
+  padding: 20px 0;
+}
+
+#load-more-btn {
+  padding: 12px 45px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  background-color: #fff;
+  transition: all 0.3s;
+}
+
+#load-more-btn:hover {
+  background-color: #f0f0f0;
+  border-color: #bbb;
+}
+
+#load-more-btn:disabled {
+  cursor: not-allowed;
+  background-color: #fafafa;
+  color: #999;
+}
+
+/* ライトボックス */
+.lightbox {
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.85);
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.lightbox-content {
+  max-width: 90%;
+  max-height: 85%;
+  object-fit: contain;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 35px;
+  color: #fff;
+  font-size: 45px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.lightbox-close:hover {
+  color: #bbb;
+}

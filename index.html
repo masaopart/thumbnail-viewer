@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>過去動画サムネイルビューア</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>過去動画サムネイル一覧</h1>
+
+    <!-- 操作パネル -->
+    <div class="controls-container">
+        <div class="source-selector">
+            <label><input type="radio" name="source" value="youtube-all"> YouTube全体</label>
+            <label><input type="radio" name="source" value="csv" checked> <span id="csv-label">げんじチャンネル</span></label>
+            <label><input type="radio" name="source" value="youtube-playlist"> げんじYouTube再生リスト(最新動画含む)</label>
+        </div>
+
+        <!-- げんじチャンネル(CSV)用 (初期表示) -->
+        <div id="csv-controls" class="source-controls">
+            <div class="search-container">
+                <input type="text" id="search-box" placeholder="タイトルで検索...">
+            </div>
+        </div>
+
+        <!-- YouTube全体用 (初期非表示) -->
+        <div id="youtube-all-controls" class="source-controls" style="display: none;">
+             <div class="search-container">
+                <input type="text" id="youtube-search-box" placeholder="YouTube全体から検索...">
+                <button id="youtube-search-btn">検索</button>
+            </div>
+        </div>
+
+        <!-- YouTube再生リスト用 (初期非表示) -->
+        <div id="youtube-playlist-controls" class="source-controls" style="display: none;">
+            <input type="hidden" id="api-key">
+            <input type="text" id="channel-url" placeholder="YouTubeチャンネルのURL" style="display: none;">
+            
+            <div id="playlist-selector-container">
+                <select id="playlist-selector"></select>
+            </div>
+        </div>
+    </div>
+
+    <div id="thumbnail-container" class="thumbnail-grid">
+        <!-- サムネイルはここにJavaScriptで挿入されます -->
+    </div>
+
+    <div id="load-more-container" class="load-more-container" style="display: none;">
+        <button id="load-more-btn">続きを読む</button>
+    </div>
+
+    <!-- ライトボックス用のHTML -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/papaparse/5.3.2/papaparse.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
