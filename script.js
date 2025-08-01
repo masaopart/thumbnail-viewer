@@ -8,12 +8,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const csvControls = document.getElementById('csv-controls');
   const youtubePlaylistControls = document.getElementById('youtube-playlist-controls');
   const youtubeAllControls = document.getElementById('youtube-all-controls');
+  const genjiLifeChannelControls = document.getElementById('genji-life-channel-controls');
   const youtubeSearchBox = document.getElementById('youtube-search-box');
   const youtubeSearchBtn = document.getElementById('youtube-search-btn');
   const channelUrlInput = document.getElementById('channel-url');
   const apiKeyInput = document.getElementById('api-key');
   const playlistSelectorContainer = document.getElementById('playlist-selector-container');
   const playlistSelector = document.getElementById('playlist-selector');
+  const genjiLifePlaylistSelectorContainer = document.getElementById('genji-life-playlist-selector-container');
+  const genjiLifePlaylistSelector = document.getElementById('genji-life-playlist-selector');
 
   const loadMoreContainer = document.getElementById('load-more-container');
   const loadMoreBtn = document.getElementById('load-more-btn');
@@ -26,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentSource = 'csv'; // 現在のデータソースを追跡
   const API_KEY = 'AIzaSyAuYkN76exq4pdnkF8ieF9bYP2Y5JNOrK8'; // キーをコード内で保持
   const CHANNEL_ID = 'UCXrp0H7BPBHx2YTYMiiKEAA'; // げんじさんのチャンネルID
+  const GENJI_LIFE_CHANNEL_ID = 'UCheQrxcAGbLeghL0lLj-HMA'; // Genji_Life_ChannelのチャンネルID
 
   // --- 初期設定 ---
   apiKeyInput.value = API_KEY; // inputにはセットするが見せない
@@ -179,6 +183,30 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     } catch (error) {
       playlistSelector.innerHTML = `<option>読み込み失敗</option>`;
+      alert(`再生リストの読み込みに失敗しました: ${error.message}`);
+      console.error(error);
+    }
+  }
+
+  // Genji_Life_Channelの再生リストをすべて取得する関数
+  async function loadGenjiLifeChannelPlaylists() {
+    genjiLifePlaylistSelectorContainer.style.display = 'block';
+    genjiLifePlaylistSelector.innerHTML = '<option>再生リストを読み込み中...</option>';
+
+    try {
+      const response = await fetch(`https://www.googleapis.com/youtube/v3/playlists?part=snippet&channelId=${GENJI_LIFE_CHANNEL_ID}&maxResults=50&key=${API_KEY}`);
+      const data = await response.json();
+      if (data.error) throw new Error(`APIエラー: ${data.error.message}`);
+      
+      genjiLifePlaylistSelector.innerHTML = '<option value="">再生リストを選択してください</option>';
+      data.items.forEach(playlist => {
+        const option = document.createElement('option');
+        option.value = playlist.id;
+        option.textContent = playlist.snippet.title;
+        genjiLifePlaylistSelector.appendChild(option);
+      });
+    } catch (error) {
+      genjiLifePlaylistSelector.innerHTML = `<option>読み込み失敗</option>`;
       alert(`再生リストの読み込みに失敗しました: ${error.message}`);
       console.error(error);
     }
@@ -386,6 +414,7 @@ document.addEventListener('DOMContentLoaded', () => {
       csvControls.style.display = 'none';
       youtubePlaylistControls.style.display = 'none';
       youtubeAllControls.style.display = 'none';
+      genjiLifeChannelControls.style.display = 'none';
       
       allVideos = []; // 表示をリセット
       displayThumbnails(allVideos);
@@ -401,6 +430,10 @@ document.addEventListener('DOMContentLoaded', () => {
           break;
         case 'youtube-all':
           youtubeAllControls.style.display = 'block';
+          break;
+        case 'genji-life-channel':
+          genjiLifeChannelControls.style.display = 'block';
+          loadGenjiLifeChannelPlaylists();
           break;
       }
     });
@@ -428,6 +461,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 再生リスト選択
   playlistSelector.addEventListener('change', (e) => {
+    loadPlaylistItems(e.target.value);
+  });
+
+  // Genji_Life_Channel再生リスト選択
+  genjiLifePlaylistSelector.addEventListener('change', (e) => {
     loadPlaylistItems(e.target.value);
   });
 

@@ -18,6 +18,7 @@
             <label><input type="radio" name="source" value="youtube-all"> YouTube全体</label>
             <label><input type="radio" name="source" value="csv" checked> <span id="csv-label">げんじチャンネル</span></label>
             <label><input type="radio" name="source" value="youtube-playlist"> げんじYouTube再生リスト(最新動画含む)</label>
+            <label><input type="radio" name="source" value="genji-life-channel"> Genji_Life_Channel再生リスト</label>
         </div>
 
         <!-- げんじチャンネル(CSV)用 (初期表示) -->
@@ -42,6 +43,13 @@
             
             <div id="playlist-selector-container">
                 <select id="playlist-selector"></select>
+            </div>
+        </div>
+
+        <!-- Genji_Life_Channel再生リスト用 (初期非表示) -->
+        <div id="genji-life-channel-controls" class="source-controls" style="display: none;">
+            <div id="genji-life-playlist-selector-container">
+                <select id="genji-life-playlist-selector"></select>
             </div>
         </div>
     </div>
