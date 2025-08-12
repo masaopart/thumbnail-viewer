@@ -237,7 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 id: videoId,
                 title: snippet.title,
                 url: `https://www.youtube.com/watch?v=${videoId}`,
-                date: snippet.publishedAt,
+                date: isSearch ? snippet.publishedAt : item.contentDetails.videoPublishedAt,
                 views: details.views || 'N/A',
                 thumbnail: snippet.thumbnails.medium.url,
                 duration: formatDuration(details.duration),
@@ -276,7 +276,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     try {
-        const apiUrl = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=${playlistId}&key=${API_KEY}&pageToken=${token || ''}`;
+        const apiUrl = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&maxResults=50&playlistId=${playlistId}&key=${API_KEY}&pageToken=${token || ''}`;
         const response = await fetch(apiUrl);
         const data = await response.json();
         if (data.error) throw new Error(`APIエラー: ${data.error.message}`);
